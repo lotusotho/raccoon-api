@@ -1,9 +1,11 @@
 # Build
 FROM rust:alpine AS builder
 WORKDIR /app
-RUN apk add --no-cache musl-dev
+RUN apk add --no-cache musl-dev git git-lfs
+RUN git lfs install
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
+RUN git lfs pull
 RUN cargo build --release
 
 # Expose
