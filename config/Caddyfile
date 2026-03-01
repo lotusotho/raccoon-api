@@ -1,5 +1,3 @@
 api.mapach.es {
-  encode gzip
-  
   reverse_proxy raccoon-api:3000
 }
