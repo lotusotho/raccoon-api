@@ -4,6 +4,7 @@ use axum::{
     http::{Response, header},
     response::{IntoResponse, Redirect},
 };
+use dotenvy::var;
 use rand::RngExt;
 
 use crate::{ApiError, AppState};
@@ -49,9 +50,11 @@ pub async fn get_random_raccoon(
 pub async fn raccoon_of_the_day(
     State(state): State<AppState>,
 ) -> Result<impl IntoResponse, ApiError> {
+    let version = var("VERSION").unwrap_or_else(|_| format!("v1"));
+
     let winner = state
         .raccoon_of_the_day
         .load(std::sync::atomic::Ordering::Relaxed);
 
-    Ok(Redirect::to(&format!("/thiscoon/{}", winner)))
+    Ok(<Redirect>::to(&format!("/{}/thiscoon/{}", version, winner)))
 }
