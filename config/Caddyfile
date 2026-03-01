@@ -1,0 +1,3 @@
+api.mapach.es {
+  reverse_proxy raccoon-api:3000
+}

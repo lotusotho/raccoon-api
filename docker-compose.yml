@@ -1,11 +1,27 @@
 services:
   raccoon-api:
     container_name: raccoon-api
-    build: .
-    image: raccoon-api:latest
+    image: ghcr.io/lotusotho/raccoon-api:main
     ports:
       - "${PORT:-3000}:3000"
     env_file:
       - .env
     volumes:
       - ./dumpster:/app/dumpster
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - raccoon-api
+
+volumes:
+  caddy_data:
+  caddy_config:
