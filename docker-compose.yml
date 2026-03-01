@@ -1,0 +1,11 @@
+services:
+  raccoon-api:
+    container_name: raccoon-api
+    build: .
+    image: raccoon-api:latest
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./dumpster:/app/dumpster
