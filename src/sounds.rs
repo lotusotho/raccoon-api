@@ -22,7 +22,6 @@ pub async fn get_random_sound() -> Result<impl IntoResponse, ApiError> {
 
     let response = Response::builder()
         .header(header::CONTENT_TYPE, "audio/mpeg")
-        .header(header::CONTENT_LENGTH, sound_content.len())
         .body(Body::from(sound_content))
         .map_err(|_| ApiError::InternalError)?;
 

@@ -17,7 +17,6 @@ pub async fn get_raccoon(Path(id): Path<u32>) -> Result<impl IntoResponse, ApiEr
 
     let response = Response::builder()
         .header(header::CONTENT_TYPE, "image/jpeg")
-        .header(header::CONTENT_LENGTH, image_content.len())
         .body(Body::from(image_content))
         .map_err(|_| ApiError::InternalError)?;
 
@@ -41,7 +40,6 @@ pub async fn get_random_raccoon(
 
     let response = Response::builder()
         .header(header::CONTENT_TYPE, "image/jpeg")
-        .header(header::CONTENT_LENGTH, image_content.len())
         .body(Body::from(image_content))
         .map_err(|_| ApiError::InternalError)?;
 
