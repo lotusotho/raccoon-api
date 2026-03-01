@@ -17,6 +17,7 @@ pub async fn get_video(Path(id): Path<u32>) -> Result<impl IntoResponse, ApiErro
 
     let response = Response::builder()
         .header(header::CONTENT_TYPE, "video/mp4")
+        .header(header::CONTENT_LENGTH, image_content.len())
         .body(Body::from(image_content))
         .map_err(|_| ApiError::InternalError)?;
 
@@ -40,6 +41,7 @@ pub async fn get_random_video(
 
     let response = Response::builder()
         .header(header::CONTENT_TYPE, "video/mp4")
+        .header(header::CONTENT_LENGTH, image_content.len())
         .body(Body::from(image_content))
         .map_err(|_| ApiError::InternalError)?;
 
