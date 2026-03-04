@@ -5,21 +5,12 @@ use axum::{
     http::{Response, StatusCode, header},
     response::IntoResponse,
 };
-use dotenvy::var;
 use tokio::time::{Duration, Instant, sleep_until};
 use tokio_cron_scheduler::{Job, JobScheduler};
 
 use crate::state::AppState;
 
 const MEDIA_FOLDER: &str = "dumpster";
-
-pub fn get_base_url() -> String {
-    let base_url = var("BASE_URL").unwrap_or_else(|_| format!("http://localhost"));
-    let port = var("PORT").unwrap_or_else(|_| "3000".to_string());
-    let version = var("VERSION").unwrap_or_else(|_| format!("v1"));
-
-    format!("{}:{}/{}", base_url, port, version)
-}
 
 pub async fn count_all_media(path: &str) -> io::Result<u16> {
     let mut images_count = 0;

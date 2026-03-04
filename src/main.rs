@@ -14,7 +14,7 @@ use crate::{
     raccoons::{get_raccoon, get_random_raccoon, raccoon_of_the_day},
     sounds::get_random_sound,
     state::AppState,
-    utils::{count_all_media, fetch_status_code, get_base_url, raccoon_of_the_day_scheduler},
+    utils::{count_all_media, fetch_status_code, raccoon_of_the_day_scheduler},
     videos::{get_random_video, get_video},
     wiki::get_wiki_redirect,
 };
@@ -129,7 +129,7 @@ async fn main() {
         .await
         .expect("failed to bind tcp listener");
 
-    println!("Server running on {}", get_base_url());
+    println!("Server running on  {}:{}", host, port);
 
     tokio::spawn(async move { raccoon_of_the_day_scheduler(state).await });
 

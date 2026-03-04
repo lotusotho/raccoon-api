@@ -1,12 +1,10 @@
 use axum::{Json, response::IntoResponse};
+use dotenvy::var;
 use rand::RngExt;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-use crate::{
-    ApiError,
-    utils::{count_all_models, get_base_url},
-};
+use crate::{ApiError, utils::count_all_models};
 
 const MEDIA_FOLDER: &str = "dumpster";
 
@@ -24,7 +22,7 @@ pub async fn get_random_raccoon_model() -> Result<impl IntoResponse, ApiError> {
 
     let model_url = format!(
         "{}/{}/models3d/racc{}.glb",
-        get_base_url(),
+        var("BASE_URL").unwrap_or_else(|_| "no_base_url".to_string()),
         MEDIA_FOLDER,
         random_id
     );
