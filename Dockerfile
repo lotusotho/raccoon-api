@@ -11,7 +11,6 @@ FROM alpine:latest
 WORKDIR /app
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /app/target/release/raccoon-api .
-COPY dumpster ./dumpster
 
 USER 1000:1000
 

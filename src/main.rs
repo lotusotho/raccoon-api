@@ -90,7 +90,6 @@ fn create_app(state: AppState) -> Router {
         .route("/sound", get(get_random_sound))
         .route("/wiki", get(get_wiki_redirect))
         .route("/games", get(get_games))
-        .nest_service("/dumpster", ServeDir::new("dumpster"))
         .with_state(state.clone());
 
     Router::new()

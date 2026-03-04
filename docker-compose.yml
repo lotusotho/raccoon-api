@@ -19,6 +19,7 @@ services:
       - ./config/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+      - ./dumpster:/dumpster
     depends_on:
       - raccoon-api
 
