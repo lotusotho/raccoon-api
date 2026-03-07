@@ -1,0 +1,8 @@
+:80 {
+  reverse_proxy raccoon-api:3000
+
+  handle_path /dumpster/models3d/*.glb {
+    root * /dumpster
+    file_server
+  }
+}
