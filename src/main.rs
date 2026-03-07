@@ -21,7 +21,7 @@ use crate::{
 use serde_json::{Value, json};
 use tower::Layer;
 use tower_governor::{GovernorLayer, governor::GovernorConfigBuilder};
-use tower_http::{normalize_path::NormalizePathLayer, services::ServeDir};
+use tower_http::normalize_path::NormalizePathLayer;
 
 mod facts;
 mod games;
