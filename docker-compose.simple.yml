@@ -15,3 +15,4 @@ networks:
   raccoon-net:
     name: raccoon-net
     driver: bridge
+    external: true
