@@ -1,8 +1,10 @@
 api.mapach.es {
-  reverse_proxy raccoon-api:3000
-
-  handle_path /dumpster/models3d/*.glb {
-    root * /dumpster
+  handle /dumpster/models3d/*.glb {
+    root * /
     file_server
+  }
+
+  handle {
+    reverse_proxy raccoon-api:3000
   }
 }
