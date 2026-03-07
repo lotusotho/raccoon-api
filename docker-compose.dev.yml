@@ -27,3 +27,7 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  raccoon-net:
+    driver: bridge
