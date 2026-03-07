@@ -17,6 +17,9 @@ on:
       - '**/Caddyfile'
       - '**/Caddyfile.dev'
       - '/dumpster/**'
+      - 'env.template'
+      - 'docker-compose.yml'
+      - 'docker-compose.dev.yml'
   pull_request:
     branches: [ "main" ]
     paths-ignore:
@@ -24,6 +27,9 @@ on:
       - '**/Caddyfile'
       - '**/Caddyfile.dev'
       - '/dumpster/**'
+      - 'env.template'
+      - 'docker-compose.yml'
+      - 'docker-compose.dev.yml'
 
 env:
   # Use docker.io for Docker Hub if empty
