@@ -68,6 +68,10 @@ async fn redirect_to_root() -> Result<impl IntoResponse, ApiError> {
     Ok(Redirect::to("/v1"))
 }
 
+async fn fallback() -> ApiError {
+    ApiError::NotFound
+}
+
 fn create_app(state: AppState) -> Router {
     let governor_conf = Arc::new(
         GovernorConfigBuilder::default()
@@ -99,6 +103,7 @@ fn create_app(state: AppState) -> Router {
     Router::new()
         .nest(&format!("/{}", version), api_routes)
         .route("/", get(redirect_to_root))
+        .fallback(fallback)
         .layer(GovernorLayer::new(governor_conf))
         .with_state(state)
 }
@@ -124,7 +129,9 @@ async fn main() {
     let normalized_service =
         NormalizePathLayer::trim_trailing_slash().layer(create_app(state.clone()));
 
-    let app = Router::new().fallback_service(normalized_service);
+    let app = Router::new()
+        .fallback(fallback)
+        .fallback_service(normalized_service);
 
     let host = var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
     let port = var("PORT").unwrap_or_else(|_| "3000".to_string());
