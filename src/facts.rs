@@ -1,4 +1,4 @@
-use axum::{Json, response::IntoResponse};
+use axum::{Json, extract::Path, response::IntoResponse};
 use rand::seq::IteratorRandom;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -12,10 +12,15 @@ struct Facts {
     pub facts: Vec<String>,
 }
 
-pub async fn get_random_fact() -> Result<impl IntoResponse, ApiError> {
-    let facts_content = tokio::fs::read_to_string(format!("{}/facts/facts.json", MEDIA_FOLDER))
-        .await
-        .map_err(|_| ApiError::NotFound)?;
+pub async fn get_random_fact(Path(locale): Path<String>) -> Result<impl IntoResponse, ApiError> {
+    if locale != "en".to_string() && locale != "es".to_string() {
+        Err(ApiError::NotFound)?;
+    }
+
+    let facts_content =
+        tokio::fs::read_to_string(format!("{}/facts/facts_{}.json", MEDIA_FOLDER, locale))
+            .await
+            .map_err(|_| ApiError::NotFound)?;
 
     let facts_data: Facts = serde_json::from_str(&facts_content).map_err(|_| ApiError::NotFound)?;
 
