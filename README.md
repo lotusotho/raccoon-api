@@ -28,6 +28,8 @@ The API is versioned (default `v1`).
 | `GET /v1/wiki` | Raccoon Wikipedia redirect |
 | `GET /v1/games` | Raccoon-related game release info |
 
+It also has a fallback handler that uses `ApiError::NotFound`
+
 ## Contribute
 
 New cool features will be added overtime! Feel free to open a new PR or issue if you'd like something added or have any ideas for a change!
