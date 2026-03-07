@@ -12,6 +12,10 @@ struct Facts {
     pub facts: Vec<String>,
 }
 
+pub async fn get_random_fact_default() -> Result<impl IntoResponse, ApiError> {
+    get_random_fact(Path("en".to_string())).await
+}
+
 pub async fn get_random_fact(Path(locale): Path<String>) -> Result<impl IntoResponse, ApiError> {
     if locale != "en".to_string() && locale != "es".to_string() {
         Err(ApiError::NotFound)?;

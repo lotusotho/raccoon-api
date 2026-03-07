@@ -7,7 +7,7 @@ use dotenvy::var;
 use std::sync::{Arc, atomic::AtomicU16};
 
 use crate::{
-    facts::get_random_fact,
+    facts::{get_random_fact, get_random_fact_default},
     games::get_games,
     memes::{get_meme, get_random_meme},
     models3d::get_random_raccoon_model,
@@ -93,6 +93,7 @@ fn create_app(state: AppState) -> Router {
         .route("/vid", get(get_random_video))
         .route("/thisvid/{id}", get(get_video))
         .route("/rotd", get(raccoon_of_the_day))
+        .route("/fact", get(get_random_fact_default))
         .route("/fact/{locale}", get(get_random_fact))
         .route("/model", get(get_random_raccoon_model))
         .route("/sound", get(get_random_sound))

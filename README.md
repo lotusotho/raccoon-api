@@ -22,7 +22,8 @@ The API is versioned (default `v1`).
 | `GET /v1/vid` | Random raccoon video |
 | `GET /v1/thisvid/{id}` | Get video by ID |
 | `GET /v1/rotd` | Raccoon of the Day |
-| `GET /v1/fact/{locale}` | Random raccoon fact - locale can be: "en" (english) or "es" (spanish) |
+| `GET /v1/fact` | Random raccoon fact - "en" (english - default) |
+| `GET /v1/fact/{locale}` | Random raccoon fact - "en" (english) or "es" (spanish) |
 | `GET /v1/model` | Random 3D model URL and attribution |
 | `GET /v1/sound` | Random raccoon sound |
 | `GET /v1/wiki` | Raccoon Wikipedia redirect |
