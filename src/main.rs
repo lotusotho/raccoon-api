@@ -1,6 +1,6 @@
 use axum::{
     Json, Router,
-    response::{IntoResponse, Result},
+    response::{IntoResponse, Redirect, Result},
     routing::get,
 };
 use dotenvy::var;
@@ -64,6 +64,10 @@ async fn get_root() -> Result<Json<Value>, ApiError> {
     })))
 }
 
+async fn redirect_to_root() -> Result<impl IntoResponse, ApiError> {
+    Ok(Redirect::to("/v1"))
+}
+
 fn create_app(state: AppState) -> Router {
     let governor_conf = Arc::new(
         GovernorConfigBuilder::default()
@@ -85,7 +89,7 @@ fn create_app(state: AppState) -> Router {
         .route("/vid", get(get_random_video))
         .route("/thisvid/{id}", get(get_video))
         .route("/rotd", get(raccoon_of_the_day))
-        .route("/fact", get(get_random_fact))
+        .route("/fact/{locale}", get(get_random_fact))
         .route("/model", get(get_random_raccoon_model))
         .route("/sound", get(get_random_sound))
         .route("/wiki", get(get_wiki_redirect))
@@ -94,6 +98,7 @@ fn create_app(state: AppState) -> Router {
 
     Router::new()
         .nest(&format!("/{}", version), api_routes)
+        .route("/", get(redirect_to_root))
         .layer(GovernorLayer::new(governor_conf))
         .with_state(state)
 }
