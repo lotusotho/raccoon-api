@@ -9,6 +9,8 @@ services:
     volumes:
       - ./src:/app/src
       - ./dumpster:/app/dumpster
+    networks:
+      - raccoon-net
 
   caddy:
     image: caddy:latest
@@ -23,6 +25,8 @@ services:
       - ./dumpster:/dumpster
     depends_on:
       - raccoon-api
+    networks:
+      - raccoon-net
 
 volumes:
   caddy_data:
@@ -30,4 +34,5 @@ volumes:
 
 networks:
   raccoon-net:
+    name: raccoon-net
     driver: bridge
