@@ -1,0 +1,10 @@
+services:
+  raccoon-api:
+    container_name: raccoon-api
+    image: ghcr.io/lotusotho/raccoon-api:main
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./dumpster:/app/dumpster
