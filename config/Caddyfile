@@ -7,4 +7,13 @@ api.mapach.es {
   handle {
     reverse_proxy raccoon-api:3000
   }
+
+  log {
+        output file /var/log/caddy/access.log
+        format json
+    }
+}
+
+monitor.mapach.es {
+  reverse_proxy goaccess:7890
 }
