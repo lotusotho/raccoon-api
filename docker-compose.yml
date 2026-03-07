@@ -28,23 +28,6 @@ services:
     networks:
       - raccoon-net
 
-  goaccess:
-    image: allinurl/goaccess
-    container_name: goaccess
-    restart: always
-    ports:
-      - "7890:7890"
-    volumes:
-      - ./logs:/srv/logs:ro
-    command:
-      - /srv/logs/access.log
-      - --log-format=COMBINED
-      - --real-time-html
-      - --port=7890
-      - --address=0.0.0.0
-    networks:
-      - raccoon-net
-
 volumes:
   caddy_data:
   caddy_config:
