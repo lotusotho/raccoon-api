@@ -12,8 +12,18 @@ on:
     branches: [ "main" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/Caddyfile'
+      - '**/Caddyfile.dev'
+      - '/dumpster/**'
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/Caddyfile'
+      - '**/Caddyfile.dev'
+      - '/dumpster/**'
 
 env:
   # Use docker.io for Docker Hub if empty
